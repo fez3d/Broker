@@ -5,6 +5,7 @@
  */
 package broker;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -37,12 +38,17 @@ public class ClienteProxy {
         try {
             socket = new Socket("localhost", 1235);
             osw =new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-            osw.write(str, 0, str.length());
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(str, 0, str.length());
+            bw.flush();
+            socket.close();
+            //osw.write(str, 0, str.length());
         } catch (IOException e) {
             System.err.print(e);
         } finally {
             socket.close();
         }
+        
     }
     
     public void regresar(){

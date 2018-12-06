@@ -6,7 +6,10 @@
 package broker;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -75,12 +78,16 @@ public class Broker {
         try {
             socket = new Socket("localhost", 1236);
             osw =new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-            osw.write(str, 0, str.length());
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(str, 0, str.length());
+            bw.flush();
+            socket.close();
         } catch (IOException e) {
             System.err.print(e);
         } finally {
             socket.close();
         }
+        
     }
     
     public void fowardResponse(String response){
