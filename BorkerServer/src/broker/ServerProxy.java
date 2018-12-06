@@ -10,5 +10,22 @@ package broker;
  * @author dmc-4
  */
 public class ServerProxy {
+    private Server server = new Server();
+    private Broker broker = new Broker();
     
+    public void unpack_data(){
+        
+    }
+    
+    public void pack_data(){
+        
+    }
+    
+    public void call_service(){
+        server.run_service();
+    }
+    
+    public void send_response(){
+        
+    }
 }
