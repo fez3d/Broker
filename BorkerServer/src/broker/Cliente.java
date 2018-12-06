@@ -11,4 +11,11 @@ package broker;
  */
 public class Cliente {
     
+    public void callServer(){
+        
+    }
+    
+    public void startTask(){
+        
+    }
 }

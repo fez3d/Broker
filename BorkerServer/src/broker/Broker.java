@@ -11,4 +11,27 @@ package broker;
  */
 public class Broker {
     
+    public void mainEventLoop(){
+        
+    }
+    
+    public void updateRepository(){
+        
+    }
+    
+    public void findServer(){
+        
+    }
+    
+    public void findClient(){
+        
+    }
+    
+    public void fowardRequest(){
+        
+    }
+    
+    public void fowardResponse(){
+        
+    }
 }

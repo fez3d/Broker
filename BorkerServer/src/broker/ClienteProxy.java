@@ -11,4 +11,19 @@ package broker;
  */
 public class ClienteProxy {
     
+    public void packData(){
+        
+    }
+    
+    public void unpackData(){
+        
+    }
+    
+    public void sendRequest(){
+        
+    }
+    
+    public void regresar(){
+        
+    }
 }
