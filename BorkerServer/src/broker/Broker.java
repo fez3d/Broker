@@ -56,13 +56,11 @@ public class Broker {
             
             BufferedReader br = new BufferedReader(new InputStreamReader(fromClientSocket.getInputStream()));
             String str;
-            System.out.println("findclient");
-            String aux = br.readLine();
-            System.out.println("str: " + aux);
-            while ((str = aux) != null) {
+            while ((str = br.readLine()) != null) {
                 System.out.println("The message: " + str);
-                System.out.println("pene");
                 fowardRequest(str);
+                fromClientSocket.close();
+                br.close();
             }
             
             return true;

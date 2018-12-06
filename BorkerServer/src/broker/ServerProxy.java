@@ -48,7 +48,8 @@ public class ServerProxy {
             String str;
             while ((str = br.readLine()) != null) {
                 System.out.println("The message: " + str);
-                
+                fromClientSocket.close();
+                br.close();
             }
             
             
