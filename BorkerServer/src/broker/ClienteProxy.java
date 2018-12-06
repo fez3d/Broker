@@ -5,9 +5,13 @@
  */
 package broker;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -17,11 +21,19 @@ import java.net.UnknownHostException;
  */
 public class ClienteProxy {
 
+    private final ServerSocket ss;
+    
     public ClienteProxy() throws IOException {
         sendRequest();
+        ss = new ServerSocket(1237);
+        loop();
     }
     
-    
+    public void loop(){
+        while(true){
+            recibir(ss);
+        }
+    }
     
     public void packData(){
         
@@ -49,6 +61,26 @@ public class ClienteProxy {
             socket.close();
         }
         
+    }
+    
+    public void recibir(ServerSocket socketClient){
+        try {
+            Socket fromClientSocket = socketClient.accept();
+            PrintWriter pw = new PrintWriter(fromClientSocket.getOutputStream(), true);
+            
+            BufferedReader br = new BufferedReader(new InputStreamReader(fromClientSocket.getInputStream()));
+            String str;
+            while ((str = br.readLine()) != null) {
+                System.out.println("The message: " + str);
+                fromClientSocket.close();
+                br.close();
+                
+            }
+            
+            
+        } catch (IOException ex) {
+            
+        }
     }
     
     public void regresar(){

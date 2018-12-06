@@ -52,6 +52,7 @@ public class ServerProxy {
                 System.out.println("The message: " + str);
                 fromClientSocket.close();
                 br.close();
+                send_response();
             }
             
             
@@ -60,7 +61,7 @@ public class ServerProxy {
         }
     }
     
-    public void send_response(String response) throws IOException{
+    public void send_response() throws IOException{
         Socket socket = null;
         OutputStreamWriter osw;
         String str = "Hello World tu madre";
