@@ -31,7 +31,7 @@ public class Broker {
         
     }
     
-    public void fowardResponse(){
+    public void fowardResponse(String response){
         
     }
 }

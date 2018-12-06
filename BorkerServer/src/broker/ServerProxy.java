@@ -10,8 +10,8 @@ package broker;
  * @author dmc-4
  */
 public class ServerProxy {
-    private Server server = new Server();
-    private Broker broker = new Broker();
+    private final Server server = new Server();
+    private final Broker broker = new Broker();
     
     public void unpack_data(){
         
@@ -25,7 +25,7 @@ public class ServerProxy {
         server.run_service();
     }
     
-    public void send_response(){
-        
+    public void send_response(String response){
+        broker.fowardResponse(response);
     }
 }
