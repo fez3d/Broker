@@ -35,7 +35,10 @@ public class Broker {
         ServerSocket socketClient = new ServerSocket(1235);
         while(true){
             if(findClient(socketClient)){
-                System.out.println("maineventloop");
+                System.out.println("maineventloop - cliente encontrado");
+            }
+            if(findServer(socketServer)){
+                System.out.println("maineventloop - servidor encontrado");
             }
         }
     }
@@ -44,8 +47,25 @@ public class Broker {
         
     }
     
-    public void findServer(){
-        
+    public boolean findServer(ServerSocket socketClient){
+        try {
+            //System.out.println("findclient");
+            Socket fromClientSocket = socketClient.accept();
+            //PrintWriter pw = new PrintWriter(fromClientSocket.getOutputStream(), true);
+            
+            BufferedReader br = new BufferedReader(new InputStreamReader(fromClientSocket.getInputStream()));
+            String str;
+            while ((str = br.readLine()) != null) {
+                System.out.println("The message: " + str);
+                fowardResponse(str);
+                fromClientSocket.close();
+                br.close();
+            }
+            
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
     }
     
     public boolean findClient(ServerSocket socketClient){
@@ -88,7 +108,21 @@ public class Broker {
         
     }
     
-    public void fowardResponse(String response){
+    public void fowardResponse(String response) throws IOException{
+        Socket socket = null;
+        OutputStreamWriter osw;
         
+        try {
+            socket = new Socket("localhost", 1235);
+            osw =new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(response, 0, response.length());
+            bw.flush();
+            socket.close();
+        } catch (IOException e) {
+            System.err.print(e);
+        } finally {
+            socket.close();
+        }
     }
 }

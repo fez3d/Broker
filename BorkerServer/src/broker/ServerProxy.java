@@ -6,8 +6,10 @@
 package broker;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -58,7 +60,22 @@ public class ServerProxy {
         }
     }
     
-    public void send_response(String response){
-        
+    public void send_response(String response) throws IOException{
+        Socket socket = null;
+        OutputStreamWriter osw;
+        String str = "Hello World tu madre";
+        try {
+            socket = new Socket("localhost", 1234);
+            osw =new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(str, 0, str.length());
+            bw.flush();
+            socket.close();
+            //osw.write(str, 0, str.length());
+        } catch (IOException e) {
+            System.err.print(e);
+        } finally {
+            socket.close();
+        }
     }
 }
