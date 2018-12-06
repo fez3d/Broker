@@ -15,6 +15,12 @@ import java.net.UnknownHostException;
  * @author dmc-4
  */
 public class ClienteProxy {
+
+    public ClienteProxy() throws IOException {
+        sendRequest();
+    }
+    
+    
     
     public void packData(){
         
